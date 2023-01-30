@@ -1,0 +1,33 @@
+var url = "mongodb://localhost:27017/mydb";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  const date = require('date-and-time')
+  
+  const value = date.format((new Date('November 20, 2022')),
+  'MM/DD/YYYY');
+  var myobj = { date: value, available: 25 };
+  dbo.collection("available").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
+});
+
+
+retrive
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/mydb";
+let na;
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("details").find({}).toArray(function(err, result){
+    if (err) throw err;
+    na = result
+    console.log(na);
+    db.close();
+  });
+});
+console.log(na);
